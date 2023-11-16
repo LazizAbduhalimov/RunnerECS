@@ -1,5 +1,8 @@
+using System;
+
 namespace RunnerECS {
-    struct MoveComponent {
+    [Serializable]
+    public struct MoveComponent {
         public float Speed;
     }
 }

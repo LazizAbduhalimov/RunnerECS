@@ -1,50 +1,54 @@
 using Leopotam.EcsLite;
 using UnityEngine;
+using AB_Utility.FromSceneToEntityConverter;
 
-namespace Client {
+namespace RunnerECS {
     sealed class Startup : MonoBehaviour {
         private EcsWorld _world;        
-        private IEcsSystems _systems;
-
+        private IEcsSystems _updateSystems;
+        private IEcsSystems _fixedUpdateSystems;
         private void Start () {
             _world = new EcsWorld ();
-            _systems = new EcsSystems (_world);
-            _systems
-                // register your systems here, for example:
-                // .Add (new TestSystem1 ())
-                // .Add (new TestSystem2 ())
-                
-                // register additional worlds here, for example:
-                // .AddWorld (new EcsWorld (), "events")
-#if UNITY_EDITOR
-                // add debug systems for custom worlds here, for example:
-                // .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ("events"))
-                .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ())
-#endif
-                .Init ();
+            _updateSystems = new EcsSystems (_world);
+            _fixedUpdateSystems = new EcsSystems(_world);
+
+            AddSystems();
+            AddEditorSystems();    
+
+            _updateSystems.ConvertScene().Init ();
+            _fixedUpdateSystems.Init();
         }
 
-        void Update () {
-            // process systems here.
-            _systems?.Run ();
+        private void Update () {
+            _updateSystems?.Run ();
+        }
+        
+        private void FixedUpdate() {
+            _fixedUpdateSystems?.Run();
         }
 
-        void OnDestroy () {
-            if (_systems != null) {
-                // list of custom worlds will be cleared
-                // during IEcsSystems.Destroy(). so, you
-                // need to save it here if you need.
-                _systems.Destroy ();
-                _systems = null;
-            }
-            
-            // cleanup custom worlds here.
-            
-            // cleanup default world.
-            if (_world != null) {
-                _world.Destroy ();
-                _world = null;
-            }
+        private void OnDestroy () {
+            _updateSystems?.Destroy ();
+            _updateSystems = null;
+
+            _fixedUpdateSystems?.Destroy();
+            _fixedUpdateSystems = null;
+
+            _world?.Destroy ();
+            _world = null;
+        }
+        
+        private void AddSystems() {
+            _updateSystems
+                .Add(new PlayerInputSystem())
+                .Add(new MoveSystem());
+        }
+
+        private void AddEditorSystems() {
+            #if UNITY_EDITOR
+                _updateSystems
+                    .Add (new Leopotam.EcsLite.UnityEditor.EcsWorldDebugSystem ());
+            #endif
         }
     }
 }
