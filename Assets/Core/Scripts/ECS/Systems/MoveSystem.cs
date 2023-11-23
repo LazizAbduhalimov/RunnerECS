@@ -30,9 +30,10 @@ namespace RunnerECS {
         {
             ref var inputComponent = ref _poolPlayerInput.Get(entity);
             ref var moveComponent = ref _poolMove.Get(entity);
-            ref var viewComponent = ref _poolView.Get(entity);
+            ref var rigidbodyComponent = ref _poolView.Get(entity);
             var xVelocity = inputComponent.DirectionX * moveComponent.SideSpeed;
-            viewComponent.Rigidbody.velocity = new Vector3(xVelocity, 0f, moveComponent.ForwardSpeed);
+            rigidbodyComponent.Rigidbody.velocity = new Vector3(xVelocity, 0f, moveComponent.ForwardSpeed);
+            moveComponent.IsMoving = rigidbodyComponent.Rigidbody.velocity.magnitude > 0;
         }
     }
 }

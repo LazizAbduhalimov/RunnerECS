@@ -45,10 +45,14 @@ namespace RunnerECS {
             _updateSystems
                 .Add(new MoveSystem())
                 .Add(new FollowSystem())
-                .Add(new BankTextSystem())
-                .Add(new LevelCompletionSystem())
-                .Add(new CoinCollectSystem())
+                .Add(new RotationSystem())
                 .Add(new PlayerInputSystem())
+
+                .Add(new BankTextSystem())
+                .Add(new AnimationSystem())
+
+                .Add(new CoinCollectSystem())
+                .Add(new LevelCompletionSystem())
                 ;
         }
 

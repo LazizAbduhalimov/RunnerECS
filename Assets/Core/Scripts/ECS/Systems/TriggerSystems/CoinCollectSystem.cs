@@ -5,7 +5,6 @@ namespace RunnerECS
 {
     public sealed class CoinCollectSystem : TriggerBaseSystem<OnTriggerEnterEvent> 
     {
-
         protected override void CheckTrigger(OnTriggerEnterEvent eventData)
         {
             if (eventData.collider.TryGetComponent<CoinTag>(out var coin))
