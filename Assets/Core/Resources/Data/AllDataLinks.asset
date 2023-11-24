@@ -12,4 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52a4da50b55c66644b439b7c4af043c4, type: 3}
   m_Name: AllDataLinks
   m_EditorClassIdentifier: 
-  CoinFXData: {fileID: 11400000, guid: a63c27a15adab424d9b567dab8d2a5d5, type: 2}
+  CoinData: {fileID: 11400000, guid: 6e3498632405fd9498ca2be66ab34386, type: 2}
+  PlayerStats: {fileID: 11400000, guid: 6bc81201b36c0e04d9358f1a6c5008f0, type: 2}

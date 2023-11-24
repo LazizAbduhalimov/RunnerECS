@@ -58,6 +58,7 @@ namespace RunnerECS {
         
         private void AddSystems() {
             _updateSystems
+                .Add(new CoinsGenerateSystem())
                 .Add(new MoveSystem())
                 .Add(new FollowSystem())
                 .Add(new RotationSystem())
@@ -65,11 +66,11 @@ namespace RunnerECS {
 
                 .Add(new BankTextSystem())
                 .Add(new AnimationSystem())
-
                 .Add(new CoinCollectSystem())
-                .Add(new SFXSystem())
                 .Add(new LevelCompletionSystem())
+
                 .Add(new UIEventsSystem())
+                .Add(new VFXSystem())
                 ;
         }
 
@@ -84,7 +85,7 @@ namespace RunnerECS {
         {
             _updateSystems
                 .Add(sharedData.EventsBus.GetDestroyEventsSystem()
-                .IncReplicant<CreateSFXEvent>());
+                .IncReplicant<CreateVFXEvent>());
         }
 
         private void AddInjections()

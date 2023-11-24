@@ -5,7 +5,8 @@ namespace RunnerECS
     [CreateAssetMenu(menuName = "ScriptableObjects/AllDataLinkContainer")]
     public class AllDataLinkContainer : ScriptableObject
     {
-        public LinkToGameObjectPrefab CoinFXData;
+        public CoinData CoinData;
+        public PlayerStats PlayerStats;
 
         public static AllDataLinkContainer GetAllDataLinks(string dataName)
         {
