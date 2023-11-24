@@ -7,19 +7,19 @@ namespace RunnerECS
         private EcsFilter _filter;
         private EcsPool<T> _pool;
 
-        public void Init(IEcsSystems systems)
+        public virtual void Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
             _filter = world.Filter<T>().End();
             _pool = world.GetPool<T>();
         }
 
-        public void Run(IEcsSystems systems)
+        public virtual void Run(IEcsSystems systems)
         {
             foreach (var entity in _filter)
             {
                 ref var eventData = ref _pool.Get(entity);
-                CheckTrigger(eventData);
+                CheckTrigger(eventData, systems.GetShared<SharedData>());
             }
         }
 
@@ -29,6 +29,6 @@ namespace RunnerECS
                 _pool.Del(entity);
         }
 
-        protected abstract void CheckTrigger(T eventData);
+        protected abstract void CheckTrigger(T eventData, SharedData sharedData);
     }
 }

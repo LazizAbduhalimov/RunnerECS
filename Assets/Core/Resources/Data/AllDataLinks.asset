@@ -1,0 +1,15 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52a4da50b55c66644b439b7c4af043c4, type: 3}
+  m_Name: AllDataLinks
+  m_EditorClassIdentifier: 
+  CoinFXData: {fileID: 11400000, guid: a63c27a15adab424d9b567dab8d2a5d5, type: 2}

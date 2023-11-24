@@ -33,6 +33,11 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
 
     [SerializeField] protected RectTransform background = null;
     [SerializeField] private RectTransform handle = null;
+
+    // Modifications
+    [SerializeField] private Camera linkedCamera;
+    //
+
     private RectTransform baseRect = null;
 
     private Canvas canvas;
@@ -55,6 +60,10 @@ public class Joystick : MonoBehaviour, IPointerDownHandler, IDragHandler, IPoint
         handle.anchorMax = center;
         handle.pivot = center;
         handle.anchoredPosition = Vector2.zero;
+
+        // Modified. This is for correct first touch
+        if (linkedCamera != null)
+            cam = linkedCamera;
     }
 
     public virtual void OnPointerDown(PointerEventData eventData)
