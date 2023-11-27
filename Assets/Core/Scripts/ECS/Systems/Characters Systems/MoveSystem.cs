@@ -6,16 +6,13 @@ namespace RunnerECS {
 
         private EcsFilter _movables;
         private EcsPool<MoveComponent> _poolMove;
-        private EcsPool<RigidbodyComponent> _poolView;
+        private EcsPool<RigidbodyComponent> _poolRigidbody;
         private EcsPool<PlayerInputComponent> _poolPlayerInput;
 
         public void Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
-            _poolMove = world.GetPool<MoveComponent>();
-            _poolPlayerInput = world.GetPool<PlayerInputComponent>();
-            _poolView = world.GetPool<RigidbodyComponent>();
-            _movables = world.Filter<MoveComponent>().Inc<PlayerInputComponent>().Inc<RigidbodyComponent>().End();
+            _movables = world.GetFilterAndPools(out _poolMove, out _poolPlayerInput, out _poolRigidbody);
         }
 
         public void Run(IEcsSystems systems)
@@ -30,7 +27,7 @@ namespace RunnerECS {
         {
             ref var inputComponent = ref _poolPlayerInput.Get(entity);
             ref var moveComponent = ref _poolMove.Get(entity);
-            ref var rigidbodyComponent = ref _poolView.Get(entity);
+            ref var rigidbodyComponent = ref _poolRigidbody.Get(entity);
             var xVelocity = inputComponent.DirectionX * moveComponent.SideSpeed;
             rigidbodyComponent.Rigidbody.velocity = new Vector3(xVelocity, 0f, moveComponent.ForwardSpeed);
             moveComponent.IsMoving = rigidbodyComponent.Rigidbody.velocity.magnitude > 0;

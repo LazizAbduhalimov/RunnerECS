@@ -10,8 +10,7 @@ namespace RunnerECS
         public virtual void Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
-            _filter = world.Filter<T>().End();
-            _pool = world.GetPool<T>();
+            _filter = world.GetFilterAndPool(out _pool);
         }
 
         public virtual void Run(IEcsSystems systems)

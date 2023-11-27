@@ -10,8 +10,7 @@ namespace RunnerECS {
         public void Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
-            _inputFilter = world.Filter<PlayerInputComponent>().End();
-            _poolInput = world.GetPool<PlayerInputComponent>();
+            _inputFilter = world.GetFilterAndPool(out _poolInput);
         }
 
         public void Run(IEcsSystems systems)

@@ -3,7 +3,22 @@ guid: 88939b227794f6649800bdd3444cb3c4
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: DarkSilver.001
+    second: {fileID: 2100000, guid: 932284f3498d9844b90dc9ce357183c3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Silver.001
+    second: {fileID: 2100000, guid: 7eb4829dd6a7b6e439e33b5d65423af7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SilverMetal.001
+    second: {fileID: 2100000, guid: c998457c74fcd0e44b64c38c788b3212, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

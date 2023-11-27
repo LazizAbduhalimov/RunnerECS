@@ -1,5 +1,4 @@
 using Leopotam.EcsLite;
-using RunnerECS;
 
 namespace RunnerECS {
     sealed class FollowSystem : IEcsInitSystem, IEcsRunSystem {
@@ -9,9 +8,7 @@ namespace RunnerECS {
 
         public void Init (IEcsSystems systems) {
             var world = systems.GetWorld ();
-            _followers = world.Filter<FollowComponent>().End();
-            _followersPool = world.GetPool<FollowComponent>();
-            _transformPool = world.GetPool<TransformComponent>();
+            _followers = world.GetFilterAndPools(out _followersPool, out _transformPool);
         }
 
         public void Run(IEcsSystems systems)

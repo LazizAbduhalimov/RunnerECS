@@ -1,6 +1,5 @@
 ﻿using Leopotam.EcsLite;
 using Leopotam.EcsLite.Unity.Ugui;
-using UnityEngine;
 
 namespace RunnerECS
 {
@@ -12,8 +11,7 @@ namespace RunnerECS
         public void Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
-            _clickEventsPool = world.GetPool<EcsUguiClickEvent>();
-            _clickEvents = world.Filter<EcsUguiClickEvent>().End();
+            _clickEvents = world.GetFilterAndPool(out _clickEventsPool);
         }
 
         public void Run(IEcsSystems systems)

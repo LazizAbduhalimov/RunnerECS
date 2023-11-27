@@ -6,11 +6,11 @@ namespace RunnerECS
     {
         private EcsFilter _filter;
         private EcsPool<BankTextComponent> _pool; 
+        
         public void Init(IEcsSystems systems)
         {
             var world = systems.GetWorld();
-            _filter = world.Filter<BankTextComponent>().End();
-            _pool = world.GetPool<BankTextComponent>();
+            _filter = world.GetFilterAndPool(out _pool);
         }
 
         public void Run(IEcsSystems systems)
